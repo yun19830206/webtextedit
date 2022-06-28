@@ -1,0 +1,15 @@
+.qoxop_highlight {background: #f3f308;}
+.mark_default {
+  background-color: yellow !important;
+}
+
+ .mark_red {
+  background-color: rgba(247, 48, 48, 0.8) !important;
+}
+
+ .mark_green{
+  background-color: rgba(19, 160, 19, 0.8) !important;
+}
+.mark_blue {
+  background-color: rgba(63, 81, 188, 0.8) !important;
+}
