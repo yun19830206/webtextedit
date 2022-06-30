@@ -10,7 +10,7 @@
       ref="myEditor"
       id="myEditor323"
     />
-    <div class="tips" ref="tip" id="mark_tips_bar" v-show="tipShow">
+    <div class="tips-mark" ref="tip" id="mark_tips_bar" v-show="tipShow">
       <template v-for="(item, index) in fieldList" :key="index">
         <div
           :style="{ background: `${item.color} !important` }"
@@ -311,5 +311,15 @@ export default defineComponent({
 }
 .leader-line {
   z-index: 1;
+}
+.tips-mark {
+  background: yellow;
+  opacity: 0.6;
+  display: flex;
+  position: absolute;
+  z-index: 11;
+}
+.tips-mark div {
+  width: 24%;
 }
 </style>
