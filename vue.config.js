@@ -14,8 +14,6 @@ module.exports = {
     host: 'localhost',
     port: 8103,
     hot: true,
-    proxy: {
-    }
   },
   css: {
     loaderOptions: {

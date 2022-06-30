@@ -1,9 +1,10 @@
 <template>
   <div class="word-box">
     <Editor
-      :api-key="apiKey"
       v-model="content"
       :init="init"
+      :api-key="apiKey"
+      :disabled="false"
       @contextmenu.prevent="rightClick"
       @click.left="editorLeft"
       ref="myEditor"
@@ -31,9 +32,9 @@ import {
   ref,
   nextTick,
 } from "vue";
-import tinymce from "tinymce/tinymce";
+
 import Editor from "@tinymce/tinymce-vue";
-import defineConfig from "../config";
+// import defineConfig from "../config.js";
 export default defineComponent({
   components: { Editor },
   props: { fieldList: Array },
@@ -48,8 +49,8 @@ export default defineComponent({
       apiKey: "qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc",
       tipShow: false,
       init: {
-        selector: "#myEditor323",
-        ...defineConfig,
+        // ...defineConfig,
+        language: "zh_CN",
         placeholder: "在这里输入文字", //textarea中的提示信息
         min_width: 320,
         min_height: 220,
@@ -58,6 +59,7 @@ export default defineComponent({
         branding: false, //tiny技术支持信息是否显示
         statusbar: false, //最下方的元素路径和字数统计那一栏是否显示
         elementpath: false, //元素路径是否显示
+        toolbar_mode: "wrap",
         fontsize_formats: "12px 14px 16px 18px 24px 36px 48px 56px 72px",
         font_formats:
           "微软雅黑=Microsoft YaHei,Helvetica Neue,PingFang SC,sans-serif;苹果苹方=PingFang SC,Microsoft YaHei,sans-serif;宋体=simsun,serif;仿宋体=FangSong,serif;黑体=SimHei,sans-serif;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Book Antiqua=book antiqua,palatino;",
@@ -253,7 +255,6 @@ export default defineComponent({
             });
           }
         }, 1000);
-        tinymce.init({});
       });
     });
     const menuSelect = (item) => {
@@ -275,6 +276,7 @@ export default defineComponent({
       });
     };
     return {
+      fieldList,
       ...toRefs(state),
       tip,
       rightClick,
@@ -291,19 +293,6 @@ export default defineComponent({
   position: relative;
   width: 100%;
   display: flex;
-}
-.tips {
-  background: yellow;
-  opacity: 0.6;
-  display: flex;
-  position: absolute;
-  z-index: 11;
-}
-.tox-collection__group {
-  display: none !important;
-}
-.tips div {
-  width: 24%;
 }
 .mark_default {
   background-color: #ffff00 !important;
@@ -322,13 +311,5 @@ export default defineComponent({
 }
 .leader-line {
   z-index: 1;
-}
-/* 隐藏apikey没有绑定当前域名的提示 */
-.tox-notifications-container .tox-notification--warning {
-  display: none !important;
-}
-
-.tox.tox-tinymce {
-  max-width: 100%;
 }
 </style>

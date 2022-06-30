@@ -134,27 +134,6 @@ export default defineComponent({
   flex: auto;
   margin-left: 15px;
 }
-.data-box {
-  border-radius: 16px;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-  padding: 0 20px;
-  margin-bottom: 10px;
-}
-.tips {
-  background: yellow;
-  opacity: 0.6;
-  display: flex;
-  position: absolute;
-  z-index: 11;
-}
-.tox-collection__group {
-  display: none !important;
-}
-.tips div {
-  width: 24%;
-}
 .mark_default {
   background-color: #ffff00 !important;
 }

@@ -1,34 +1,35 @@
 <template>
   <div class="field-box">
-    <template v-for="(item, index) in fieldList" :key="index">
-      <div
-        class="data-box"
-        :class="currentId && currentId === item.fieldId ? 'selectField' : ''"
-        :style="{ background: item.color }"
-        :id="item.fieldId || index"
-        @click="lineFun($event, item)"
-      >
-        {{ item.fieldName }}
+    <template v-if="fieldList && fieldList.length">
+      <div v-for="(item, index) in fieldList" :key="item.fieldId">
+        <div
+          class="data-box"
+          :class="currentId && currentId === item.fieldId ? 'selectField' : ''"
+          :style="{ background: item.color }"
+          :id="item.fieldId"
+          @click="lineFun($event, item)"
+        >
+          {{ item.fieldName }}
+        </div>
+        <Editor
+          v-if="index === 1"
+          :api-key="apiKey"
+          v-model="item.fieldValue"
+          :init="fieldInit"
+        />
+        <el-input
+          v-else
+          style="margin-bottom: 30px"
+          v-model="item.fieldValue"
+          placeholder="请输入内容"
+        ></el-input>
       </div>
-      <Editor
-        v-if="index === 1"
-        :api-key="apiKey"
-        v-model="item.fieldValue"
-        :init="fieldInit"
-      />
-      <el-input
-        v-else
-        style="margin-bottom: 30px"
-        v-model="item.fieldValue"
-        placeholder="请输入内容"
-      ></el-input>
     </template>
   </div>
 </template>
 <script>
 import { defineComponent, onMounted, reactive, toRefs, watch } from "vue";
-import { defineConfig } from "../config.js";
-import tinymce from "tinymce/tinymce";
+// import defineConfig from "../config.js";
 import Editor from "@tinymce/tinymce-vue";
 export default defineComponent({
   props: {
@@ -42,7 +43,8 @@ export default defineComponent({
       currentId: null,
       apiKey: "qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc",
       fieldInit: {
-        ...defineConfig,
+        // ...defineConfig,
+        language: "zh_CN",
         placeholder: "在这里输入文字", //textarea中的提示信息
         min_width: 120,
         min_height: 220,
@@ -72,13 +74,11 @@ export default defineComponent({
         state.currentId = val;
       }
     );
-    onMounted(() => {
-      tinymce.init({});
-    });
+    onMounted(() => {});
     return {
+      fieldList,
       ...toRefs(state),
       lineFun,
-      fieldList,
     };
   },
 });
